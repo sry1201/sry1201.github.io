@@ -24,11 +24,8 @@ else                                #参数错误则输出Usage
     git commit -m 'deploy'
 fi
  
-# 如果你想要部署到 https://USERNAME.github.io
-git push -f https://github.com/sry1201/sry1201.github.io.git main
- 
-# 如果发布到 https://USERNAME.github.io/<REPO>  REPO=github上的项目
-# git push -f git@github.com:USERNAME/<REPO>.git master:gh-pages
+# 如果你想要部署到 https://USERNAME.github.io, 由于执行初始化后dist目录本地的分支是master，远程的分支是main，git branch -m master main修改分支名，或者如下操作才能正常提交
+git push -f https://github.com/sry1201/sry1201.github.io.git master:main
 
 # 退回原有目录，需要之前执行过cd，否则报错
 cd -
