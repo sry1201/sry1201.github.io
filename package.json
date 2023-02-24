@@ -1,0 +1,20 @@
+{
+  "name": "vuepress-bolg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "deploy dist": "bash gitpush.sh",
+    "deploy": "gitpush-all.bat"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vuepress/client": "2.0.0-beta.60",
+    "vue": "^3.2.47",
+    "vuepress": "2.0.0-beta.60"
+  }
+}
