@@ -1,3 +1,20 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #111;
+}
+
+#footer {
+  height: 400px;
+  min-height: 400px;
+  width: 100vw;
+  overflow: visible;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+}
 /* 全局：去掉页面滚动条 */
 html, body {
   margin: 0;
