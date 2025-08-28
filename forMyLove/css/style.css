@@ -3,17 +3,27 @@ html, body {
   margin: 0;
   padding: 0;
   background: #111;
+  box-sizing: border-box;
 }
 
 #footer {
+  width: 100vw;
   height: 400px;
   min-height: 400px;
-  width: 100vw;
   overflow: visible;
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   z-index: 10;
+}
+
+#scene {
+  width: 100vw;
+  height: 400px;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
 /* 全局：去掉页面滚动条 */
 html, body {
