@@ -78,11 +78,12 @@ html, body {
 /* 合并为一处：放大人物与地面，并微调位置 */
 #scene {
   position: absolute;
-  left: 0;
-  bottom: 0;                 /* 锚定底部 */
+  left: 25%;
+  bottom: 0;                 /* 锚定底部（关键） */
+  margin-left: -768px;     /* 调整人物位置 */
   height: 100%;
   transform-origin: left bottom;
-  transform: translate(0, 0) scale(1); /* 如需微调人物位置，可调整translate和scale数值 */
+  transform: translate(-790px, 99px) scale(1); /* 可把 16px 微调为 12~24px */
 }
 
 /* 关键：让 #footer 相对视口定位，不再相对容器；防止“悬空变小” */
