@@ -1,40 +1,12 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #111;
-  box-sizing: border-box;
-}
-
-#footer {
-  width: 100vw;
-  height: 400px;
-  min-height: 400px;
-  overflow: visible;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-}
-
-#scene {
-  width: 100vw;
-  height: 400px;
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-/* 全局：去掉页面滚动条 */
+/* 基础重置 */
 html, body {
   margin: 0;
   height: 100%;
-  background-color: #000 !important; /* 与 030 一致 */
-  overflow: hidden;
+  background: #000;
+  overflow: hidden; /* 页面为全屏动效，无需滚动条 */
 }
 
-/* 层级：universe(0) < canvas(1) < three(2) < footer(10) */
-/* 背景与文字画布：不拦截鼠标，层级低于心脏与 footer */
+/* 画布层级：不遮挡 footer */
 #universe {
   position: fixed;
   inset: 0;
@@ -45,68 +17,34 @@ html, body {
 #canvas {
   position: fixed;
   inset: 0;
-  z-index: 2;            /* 低于 Three.js 与 footer */
+  z-index: 2;
   pointer-events: none;
   background: transparent;
 }
 
-/* footer（人物）贴底且置顶显示 */
+/* footer：贴底，宽度自适应 */
 #footer {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;   /* 贴底 */
-  height: 380px; /* 你的放大高度，可在 360~420 调整 */
+  bottom: 0;
   width: 100%;
-  z-index: 20;
-  overflow: hidden; /* 防止内部放大后溢出产生滚动 */
+  height: min(26vw, 420px);
+  min-height: 280px; /* 防止过矮导致人物不可见 */
+  z-index: 30;       /* 高于画布 */
+  overflow: hidden;
 }
 
-/* 保持你“最初”的 footer 样式，并加 z-index，避免被遮挡 */
-#footerContent {
-  font-family: sans-serif;
-  font-size: 110%;
-  color: rgba(200, 220, 255, .3);
-  width: 100%;
-  position: fixed;
-  bottom: 0%;
-  padding: 20%;
-  text-align: center;
-  z-index: 20;
-}
-
-/* 合并为一处：放大人物与地面，并微调位置 */
+/* SVG 自适应铺满 footer，高度优先，保持底对齐 */
 #scene {
   position: absolute;
-  left: 25%;
-  bottom: 0;                 /* 锚定底部（关键） */
-  margin-left: -768px;     /* 调整人物位置 */
-  height: 100%;
+  left: 0;
+  bottom: 0;
+  width: auto;      /* 关键：宽度跟随纵横比，不再被拉满导致居中 */
+  height: 100%;     /* 高度铺满 footer，高度优先 */
+  display: block;
   transform-origin: left bottom;
-  transform: translate(-790px, 99px) scale(1); /* 可把 16px 微调为 12~24px */
 }
 
-/* 关键：让 #footer 相对视口定位，不再相对容器；防止“悬空变小” */
-.container { position: static; }
-.content { position: static; }
-
-/* 画布保持透明（避免遮住页面背景） */
-#universe,
-#canvas {
-  background: transparent;
-}
-
-/* 兜底层，防止被 JS 内联覆盖；同样粘贴与 030 完全一致的背景声明 */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(2000px at 10% 130%, rgba(33, 39, 80, 1) 10%, #020409 100%) !important;
-}
-
-/* 与 030 完全一致的渐变，仅添加 background，不改动其他样式 */
-.container {
-  background-image: radial-gradient(2000px at 10% 130%, rgba(33, 39, 80, 1) 10%, #020409 100%) !important;
-}
+/* 确保 SVG 内容在深色背景下可见 */
+#footer svg { width: 100%; height: 100%; display: block; }
